@@ -88,6 +88,7 @@ public class Image3DMenubar extends JMenuBar implements ActionListener,
 	private JCheckBoxMenuItem show;
 	private JMenuItem viewposXY, viewposXZ, viewposYZ, viewnegXY, viewnegXZ, viewnegYZ;
 	private JMenuItem sphere, box, cone, tube;
+	private JMenuItem outputMeshs;
 
 	private JMenu transformMenu;
 	private JMenu landmarksMenu;
@@ -97,6 +98,7 @@ public class Image3DMenubar extends JMenuBar implements ActionListener,
 	private JMenu fileMenu;
 	private JMenu helpMenu;
 	private JMenu addMenu;
+	private JMenu holeMenu;
 
 	public Image3DMenubar(Image3DUniverse univ) {
 		super();
@@ -115,19 +117,31 @@ public class Image3DMenubar extends JMenuBar implements ActionListener,
 		this.add(viewMenu);
 
 		addMenu = createAddMenu();
-		this.add(addMenu);
+		//this.add(addMenu);
 
 		landmarksMenu = createLandmarkMenu();
 		this.add(landmarksMenu);
 
 		helpMenu = createHelpMenu();
 		this.add(helpMenu);
+		
+		holeMenu = createHoleMenu();
+		this.add(holeMenu);
 
 		contentSelected(null);
 	}
+	
+	public JMenu createHoleMenu() {
+		JMenu hole = new JMenu("Hole Finding");
+		outputMeshs = new JMenuItem("Output Meshs");
+		outputMeshs.addActionListener(this);
+		hole.add(outputMeshs);
+		
+		return hole;		
+	}
 
 	public JMenu createFileMenu() {
-		JMenu file = new JMenu("FileKKKKKKKKKKK");
+		JMenu file = new JMenu("File");
 
 		open = new JMenuItem("Open...");
 		open.addActionListener(this);
@@ -647,6 +661,8 @@ public class Image3DMenubar extends JMenuBar implements ActionListener,
 			executer.editShortcuts();
 		else if(src == j3dproperties)
 			executer.j3dproperties();
+		else if (src == outputMeshs)
+			executer.outputMeshs();
 		else if (viewposXY == src)
 			executer.execute(new Runnable() { @Override
 			public void run() { univ.rotateToPositiveXY(); }});

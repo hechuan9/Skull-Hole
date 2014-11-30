@@ -1619,6 +1619,16 @@ public class Executer {
 		boolean vis = gd.getNextBoolean();
 		univ.showAttribute(Image3DUniverse.ATTRIBUTE_SCALEBAR, vis);
 	}
+	
+	/* **********************************************************
+	 * Hole Finding
+	 * *********************************************************/
+	public void outputMeshs() {
+		TextWindow tw = new TextWindow("Meshs data",
+				"Key\tValue", "", 512, 512);
+		
+	}
+	
 
 
 
